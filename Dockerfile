@@ -4,6 +4,9 @@ FROM ubuntu:20.04
 #Define time zone
 ENV TZ=America/Bogota
 
+#Deny any interaction
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Update Ubuntu Software repository
 RUN apt update
 
