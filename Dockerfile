@@ -8,16 +8,16 @@ ENV TZ=America/Bogota
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Update Ubuntu Software repository
-RUN apt update
+CMD sudo apt update
 
 # Install HTTPD_Server
-RUN apt-get install -y apache2
+CMD sudo apt-get install -y apache2
 
 # Check Status HTTPD_Server
-RUN systemctl restart apache2
+CMD systemctl restart apache2
 
 # Check Status HTTPD_Server
-RUN systemctl status apache2 
+CMD systemctl status apache2 
 
 COPY . /usr/local/apache2/htdocs/
 
