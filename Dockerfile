@@ -1,6 +1,9 @@
 # Download base image ubuntu 20.04
 FROM ubuntu:20.04
 
+#Define time zone
+ENV TZ=America/Bogota
+
 # Update Ubuntu Software repository
 RUN apt update
 
