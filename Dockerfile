@@ -7,7 +7,11 @@ ENV TZ=America/Bogota
 #Deny any interaction
 ENV DEBIAN_FRONTEND=noninteractive
 
+#Copy DevCode
 COPY ./index.html /usr/local/apache2/htdocs/
+
+#Echo message
+CMD ["echo","success"]
 
 # Expose Port for the Application 
 EXPOSE 80 443
