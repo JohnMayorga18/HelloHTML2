@@ -13,6 +13,12 @@ RUN apt update
 # Install HTTPD_Server
 RUN apt-get install -y apache2
 
+# Check Status HTTPD_Server
+RUN systemctl restart apache2
+
+# Check Status HTTPD_Server
+RUN systemctl status apache2 
+
 COPY . /usr/local/apache2/htdocs/
 
 # Expose Port for the Application 
