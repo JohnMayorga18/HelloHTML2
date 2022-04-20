@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 COPY ./index.html /usr/local/apache2/htdocs/
 
 #Echo message
-CMD echo "test"
+RUN echo "test"
 
 # Expose Port for the Application 
 EXPOSE 80 443
