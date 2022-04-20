@@ -19,7 +19,7 @@ FROM httpd:2.4
 # Check Status HTTPD_Server
 #CMD systemctl status apache2 
 
-COPY ./index.html /usr/local/apache2/htdocs/
+COPY . /usr/local/apache2/htdocs/
 
 # Expose Port for the Application 
 EXPOSE 80 443
