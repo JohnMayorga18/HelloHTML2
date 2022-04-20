@@ -18,4 +18,3 @@ RUN mkdir "Sucess"
 #Copy SuccessMesaje
 COPY ./sucess.txt /usr/src/Sucess
 RUN cat /sucess.txt
-EOF
