@@ -6,8 +6,8 @@ on:
     types: [completed]
 
 env:
-  CONTAINER_NAME: GITHUB_SHA
-  RESOURCE_GROUP: GITHUB_RUN_ID
+  CONTAINER_NAME: $GITHUB_SHA
+  RESOURCE_GROUP: $GITHUB_RUN_ID
   IMAGE_PULL_SECRET_NAME: "your-image-pull-secret-name"
 
 jobs:
