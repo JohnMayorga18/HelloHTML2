@@ -32,11 +32,11 @@ jobs:
 
     # Creo Un nuevo resource group
     - name: Greferfrferf
-      run: az group create --location westus --name env.RESOURCE_GROUP --tags Organización=SENA Lenguaje=HTML Plataforma=Docker
+      run: az group create --location westus --name $RESOURCE_GROUP --tags Organización=SENA Lenguaje=HTML Plataforma=Docker
 
     # Intento Crear la instracia de Docker
     - name: Get ACR credentials
-      run: az container create --resource-group env.RESOURCE_GROUP --cpu 1 --memory 1.5 --os-type Linux --ip-address public --ports {80,8080} --protocol tcp --protocol udp --dns-name-label miconyainerp --location westus --name env.CONTAINER_NAME --image johnmayorga18/miprimerrepo:9551dd1624e213dfc31c435640188f06f7c9aa20 --restart-policy OnFailure 
+      run: az container create --resource-group $RESOURCE_GROUP --cpu 1 --memory 1.5 --os-type Linux --ip-address public --ports {80,8080} --protocol tcp --protocol udp --dns-name-label miconyainerp --location westus --name $CONTAINER_NAME --image johnmayorga18/miprimerrepo:9551dd1624e213dfc31c435640188f06f7c9aa20 --restart-policy OnFailure 
       id: get-acr-creds
 
    
