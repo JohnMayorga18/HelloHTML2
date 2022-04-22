@@ -1,0 +1,43 @@
+name: NewContainInstan
+
+on:
+  workflow_run:
+    workflows: [Docker Image CI]
+    types: [completed]
+
+env:
+  CONTAINER_NAME: GITHUB_SHA
+  RESOURCE_GROUP: GITHUB_RUN_ID
+  IMAGE_PULL_SECRET_NAME: "your-image-pull-secret-name"
+
+jobs:
+  build:
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+
+    runs-on: ubuntu-latest
+    steps:
+    # Checks out the repository this file is in
+    - uses: actions/checkout@v3
+    
+    # Intento iniciar sesion en el portal de azure
+    - name: Azure login
+      uses: azure/login@v1.4.3
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    # Creo Un nuevo resource group
+    - name: Greferfrferf
+      run: az group create --location westus --name RESOURCE_GROUP --tags Organización=SENA Lenguaje=HTML Plataforma=Docker
+
+    # Intento Crear la instracia de Docker
+    - name: Get ACR credentials
+      run: az container create --resource-group RESOURCE_GROUP --cpu 1 --memory 1.5 --os-type Linux --ip-address public --ports {80,8080} --protocol tcp --protocol udp --dns-name-label miconyainerp --location westus --name CONTAINER_NAME --image johnmayorga18/miprimerrepo:9551dd1624e213dfc31c435640188f06f7c9aa20 --restart-policy OnFailure 
+      id: get-acr-creds
+
+   
+   
