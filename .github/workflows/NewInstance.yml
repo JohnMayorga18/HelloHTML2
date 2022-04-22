@@ -6,7 +6,7 @@ on:
     types: [completed]
 
 env:
-  CONTAINER_NAME: $GITHUB_SHA
+  CONTAINER_NAME: PrimerContenedor
   RESOURCE_GROUP: Grupito
   IMAGE_PULL_SECRET_NAME: "your-image-pull-secret-name"
 
