@@ -1,0 +1,40 @@
+---
+
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+    
+env:
+  TagD: ultimaversion
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - uses: actions/checkout@v3
+    
+    #Inicializando
+    - name: Loading
+      run: cat sucess.txt
+    
+    #Inicio sesión en la web page docker
+    - name: Login DockerHub WebService
+      run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
+      
+    #Elimino la ultima versión del docker Hub
+    # - name: Deleting last image
+    #  run:  docker image rm docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$TagD
+    
+    #Construyo la imagen docker apartir de los archivos GitHub 
+    - name: Build Docker Image
+      run: docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$TagD
+    
+    #Subo la imagen construida a mi DockerHub
+    - name: Public/Push Docker Image
+      run: docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$TagD
+
+...

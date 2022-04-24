@@ -1,3 +1,5 @@
+---
+
 name: NewContainInstan
 
 on:
@@ -6,9 +8,12 @@ on:
     types: [completed]
 
 env:
+  #Azure Variables
   CONTAINER_NAME: containerdejohn
   RESOURCE_GROUP: Grupito
   IMAGE_PULL_SECRET_NAME: "your-image-pull-secret-name"
+  #Docker Variables
+  DockerImag: "johnmayorga18/hellohtml:ultimaversion"
 
 jobs:
   build:
@@ -22,6 +27,10 @@ jobs:
     # Checks out the repository this file is in
     - uses: actions/checkout@v3
     
+    #Inicializando
+    - name: Loading
+      run: cat sucess.txt
+    
     # Intento iniciar sesion en el portal de azure
     - name: Azure login
       uses: azure/login@v1.4.3
@@ -32,12 +41,28 @@ jobs:
 
     # Creo Un nuevo resource group
     - name: CrearGrupoRecursos
-      run: az group create --location westus --name $RESOURCE_GROUP --tags Organización=SENA Lenguaje=HTML Plataforma=Docker
+      run: |
+       az group create \ 
+       --location westus \ 
+       --name $RESOURCE_GROUP \ 
+       --tags Organización=SENA Lenguaje=HTML Plataforma=Docker
 
     # Intento Crear la instracia de Docker
     - name: CrearContainer
-      run: az container create --resource-group $RESOURCE_GROUP --cpu 1 --memory 1.5 --os-type Linux --ip-address public --ports {80,8080} --protocol tcp --protocol udp --dns-name-label miconyainerp --location westus --name $CONTAINER_NAME --image johnmayorga18/miprimerrepo:056cd9e5ccd042ebd4f88935e8dbc2f388547be6 --restart-policy OnFailure 
+      run: | 
+       az container create \ 
+       --resource-group $RESOURCE_GROUP \ 
+       --cpu 1 \ 
+       --memory 1.5 \ 
+       --os-type Linux \ 
+       --ip-address public 
+       --ports 80 \ 
+       --protocol tcp \ 
+       --dns-name-label miconyainerp \ 
+       --location westus \ 
+       --name $CONTAINER_NAME \ 
+       --image $DockerImag \ 
+       --restart-policy OnFailure \ 
       id: get-acr-creds
 
-   
-   
+...
