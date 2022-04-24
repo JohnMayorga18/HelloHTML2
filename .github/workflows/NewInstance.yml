@@ -27,6 +27,10 @@ jobs:
     # Checks out the repository this file is in
     - uses: actions/checkout@v3
     
+    #Inicializando
+    - name: Loading
+      run: cat sucess.txt
+    
     # Intento iniciar sesion en el portal de azure
     - name: Azure login
       uses: azure/login@v1.4.3
