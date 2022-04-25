@@ -22,12 +22,12 @@ jobs:
       run: cat sucess.txt
     
     #Inicio sesión en la web page docker
-    # - name: Login DockerHub WebService
-    #  run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
+    - name: Login DockerHub WebService
+      run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
       
     #Elimino la ultima versión del docker Hub
-    - name: Deleting last image
-      run:  docker image rm docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$TagD
+    #- name: Deleting last image
+    #  run:  docker image rm docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$TagD
     
     #Construyo la imagen docker apartir de los archivos GitHub 
     - name: Build Docker Image
