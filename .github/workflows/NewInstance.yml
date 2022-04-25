@@ -44,14 +44,14 @@ jobs:
       run: |
         az group create \
         --location westus \
-        --name $RESOURCE_GROUP \
+        --name $RANDOM \
         --tags Organización=SENA Lenguaje=HTML Plataforma=Docker
 
     # Intento Crear la instracia de Docker
     - name: CrearContainer
       run: |
         az container create \
-        --resource-group $RESOURCE_GROUP \
+        --resource-group 10755 \
         --cpu 1 \
         --memory 1.5 \
         --os-type Linux \
