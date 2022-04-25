@@ -9,8 +9,10 @@ on:
 
 env:
   #Azure Variables
+  RESOURCE_GROUP: Grupito$RANDOM
   CONTAINER_NAME: containerdejohn
   IMAGE_PULL_SECRET_NAME: "your-image-pull-secret-name"
+  NOMB_DNS_CONT: micontaine$RANDOM
   #Docker Variables
   DockerImag: "johnmayorga18/hellohtml:ultimaversion"
 
@@ -41,24 +43,23 @@ jobs:
     # Creo Un nuevo resource group
     - name: CrearGrupoRecursos
       run: |
-        NumResour=$RANDOM
         az group create \
         --location westus \
-        --name "Grupo"$NumResour \
+        --name $RESOURCE_GROUP \
         --tags Organización=SENA Lenguaje=HTML Plataforma=Docker
 
     # Intento Crear la instracia de Docker
     - name: CrearContainer
       run: |
         az container create \
-        --resource-group "Grupo"$NumResour \
+        --resource-group $RESOURCE_GROUP \
         --cpu 1 \
         --memory 1.5 \
         --os-type Linux \
         --ip-address public \
         --ports 80 \
         --protocol tcp \
-        --dns-name-label micontaine$NumResour \
+        --dns-name-label $NOMB_DNS_CONT \
         --location westus \
         --name $CONTAINER_NAME \
         --image $DockerImag \
