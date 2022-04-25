@@ -42,31 +42,27 @@ jobs:
     # Creo Un nuevo resource group
     - name: CrearGrupoRecursos
       run: |
-       (
-        az group create \ 
-        --location westus \ 
-        --name $RESOURCE_GROUP \ 
+        az group create \
+        --location westus \
+        --name $RESOURCE_GROUP \
         --tags Organización=SENA Lenguaje=HTML Plataforma=Docker
-       )
 
     # Intento Crear la instracia de Docker
     - name: CrearContainer
-      run: | 
-       ( 
-        az container create \ 
-        --resource-group $RESOURCE_GROUP \ 
-        --cpu 1 \ 
-        --memory 1.5 \ 
-        --os-type Linux \ 
-        --ip-address public 
-        --ports 80 \ 
-        --protocol tcp \ 
-        --dns-name-label miconyainerp \ 
-        --location westus \ 
-        --name $CONTAINER_NAME \ 
-        --image $DockerImag \ 
+      run: |
+        az container create \
+        --resource-group $RESOURCE_GROUP \
+        --cpu 1 \
+        --memory 1.5 \
+        --os-type Linux \
+        --ip-address public \
+        --ports 80 \
+        --protocol tcp \
+        --dns-name-label miconyainerp \
+        --location westus \
+        --name $CONTAINER_NAME \
+        --image $DockerImag \
         --restart-policy OnFailure 
-       )
       id: get-acr-creds
 
 ...
