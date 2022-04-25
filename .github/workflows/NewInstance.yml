@@ -43,23 +43,24 @@ jobs:
     # Creo Un nuevo resource group
     - name: CrearGrupoRecursos
       run: |
+        GrupR="gru"$RANDOM
         az group create \
         --location westus \
-        --name $RESOURCE_GROUP \
+        --name $GrupR \
         --tags Organización=SENA Lenguaje=HTML Plataforma=Docker
 
     # Intento Crear la instracia de Docker
     - name: CrearContainer
       run: |
         az container create \
-        --resource-group $RESOURCE_GROUP \
+        --resource-group $GrupR \
         --cpu 1 \
         --memory 1.5 \
         --os-type Linux \
         --ip-address public \
         --ports 80 \
         --protocol tcp \
-        --dns-name-label $NOMB_DNS_CONT \
+        --dns-name-label undnsparaunco \
         --location westus \
         --name $CONTAINER_NAME \
         --image $DockerImag \
